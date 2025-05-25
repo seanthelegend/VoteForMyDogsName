@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Name Voting</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #results {
+      margin-top: 30px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vote for Your Favorite Name</h1>
+  <button class="button" id="btnCharlote" onclick="vote('Charlote')">Charlote</button>
+  <button class="button" id="btnCoco" onclick="vote('Coco')">Coco</button>
+  <button class="button" id="btnXena" onclick="vote('Xena')">Xena</button>
+
+  <div id="results">
+    <h2>Hidden Votes (Only You Can See)</h2>
+    <p>Charlote: <span id="charloteCount">0</span></p>
+    <p>Coco: <span id="cocoCount">0</span></p>
+    <p>Xena: <span id="xenaCount">0</span></p>
+  </div>
+
+  <script>
+    let votes = {
+      Charlote: 0,
+      Coco: 0,
+      Xena: 0
+    };
+
+    let hasVoted = false;
+
+    function vote(name) {
+      if (hasVoted) return;
+      votes[name]++;
+      hasVoted = true;
+      disableButtons();
+      updateResults();
+    }
+
+    function disableButtons() {
+      document.getElementById('btnCharlote').disabled = true;
+      document.getElementById('btnCoco').disabled = true;
+      document.getElementById('btnXena').disabled = true;
+    }
+
+    function updateResults() {
+      document.getElementById('charloteCount').textContent = votes.Charlote;
+      document.getElementById('cocoCount').textContent = votes.Coco;
+      document.getElementById('xenaCount').textContent = votes.Xena;
+      document.getElementById('results').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
